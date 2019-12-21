@@ -23,3 +23,4 @@ def menu():
         data = tekst.split(".")
         num_of_char = len(data)
         print('Count in text file :', num_of_char)
+        #c
