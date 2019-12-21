@@ -13,3 +13,13 @@ def menu():
         r = requests.get(url)
         with open('file.txt', 'w') as file:
                 file.write(r.text.encode('UTF-8'))
+    elif choice == 5:
+        plik = open('file.txt')
+        try:
+            tekst = plik.read()
+        finally:
+            plik.close()
+
+        data = tekst.split(".")
+        num_of_char = len(data)
+        print('Count in text file :', num_of_char)
