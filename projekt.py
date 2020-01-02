@@ -38,6 +38,9 @@ elif choice == 5:
     finally:
         plik.close()
 
-    data = tekst.split(".")
-    num_of_char = len(data)
-    print('Count in text file :', num_of_char)
+
+        data = tekst.split(".")
+        num_of_char = len(data)
+        print('Count in text file :', num_of_char)
+
+
