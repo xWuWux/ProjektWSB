@@ -30,7 +30,23 @@ elif choice == 3:
     data = tekst.split(" ")
     num_of_words = len(data)
     print('Count in text file :', num_of_words)
+elif choice == 2:
+    def count_letters():
+        global letters
+        letters = 0
+        try:
+            with open(filename, 'r') as myfile:
+                data = myfile.read()
 
+            for x in data:
+                if x.isalpha():
+                    letters += 1
+
+            print(" Ilość liter w pliku ", filename, " to ", str(letters))
+        except FileNotFoundError:
+            print(" ** Brak pliku ", filename, " **")
+        except Exception:
+            print(" ** Nie mogę otworzyć pliku ", filename)
 elif choice == 5:
     plik = open('file.txt')
     try:
