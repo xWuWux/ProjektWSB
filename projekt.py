@@ -1,3 +1,5 @@
+import requests
+
 def menu():
     print("1. Pobierz plik z internetu ")
     print("2. Zlicz liczbe liter w pobranym pliku ")
@@ -7,20 +9,54 @@ def menu():
     print("6. Wygeneruj raport o uzyciu liter (A-Z) ")
     print("7. Zapisz statystyki z punktow 2-5 do pliku statystyki.txt ")
     print("8. Wyjscie z programu ")
-    choice= int(input("Enter choice: "))
-    if choice==1:
-        url = "http://s3.zylowski.net/public/input/5.txt"
-        r = requests.get(url)
-        with open('file.txt', 'w') as file:
-                file.write(r.text.encode('UTF-8'))
-    elif choice == 5:
-        plik = open('file.txt')
+    choice = int(input("Enter choice: "))
+    return choice
+
+choice = menu()
+
+if choice==1:
+    url = "http://s3.zylowski.net/public/input/5.txt"
+    r = requests.get(url)
+    with open('file.txt', 'w') as file:
+        file.write(r.text.encode('UTF-8'))
+
+elif choice == 3:
+    plik = open('file.txt')
+    try:
+        tekst = plik.read()
+    finally:
+        plik.close()
+
+    data = tekst.split(" ")
+    num_of_words = len(data)
+    print('Count in text file :', num_of_words)
+elif choice == 2:
+    def count_letters():
+        global letters
+        letters = 0
         try:
-            tekst = plik.read()
-        finally:
-            plik.close()
+            with open(filename, 'r') as myfile:
+                data = myfile.read()
+
+            for x in data:
+                if x.isalpha():
+                    letters += 1
+
+            print(" Ilość liter w pliku ", filename, " to ", str(letters))
+        except FileNotFoundError:
+            print(" ** Brak pliku ", filename, " **")
+        except Exception:
+            print(" ** Nie mogę otworzyć pliku ", filename)
+elif choice == 5:
+    plik = open('file.txt')
+    try:
+        tekst = plik.read()
+    finally:
+        plik.close()
+
 
         data = tekst.split(".")
         num_of_char = len(data)
         print('Count in text file :', num_of_char)
-        #c
+
+
