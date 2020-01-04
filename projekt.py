@@ -47,6 +47,39 @@ elif choice == 2:
             print(" ** Brak pliku ", filename, " **")
         except Exception:
             print(" ** Nie mogę otworzyć pliku ", filename)
+elif choice == 4:
+    plik = open('file.txt')
+    try:
+        tekst = plik.read()
+    finally:
+        plik.close()
+
+    dataD = tekst.split(".")
+    dataC = tekst.split(",")
+    dataS = tekst.split(";")
+    dataCo = tekst.split(":")
+    dataQ = tekst.split("?")
+    dataE = tekst.split("!")
+    dataDa = tekst.split("-")
+
+    num_of_d = len(dataD)
+    num_of_c = len(dataC)
+    num_of_s = len(dataS)
+    num_of_co = len(dataCo)
+    num_of_q = len(dataQ)
+    num_of_e = len(dataE)
+    num_of_Da = len(dataDa)
+
+
+    print('. : ',num_of_d)
+    print(', : ',num_of_c)
+    print('; : ',num_of_s)
+    print(': : ',num_of_co)
+    print('? : ',num_of_q)
+    print('! : ',num_of_e)
+    print('- : ',num_of_Da)
+
+    menu()
 elif choice == 5:
     plik = open('file.txt')
     try:
@@ -56,7 +89,7 @@ elif choice == 5:
 
 
         data = tekst.split(".")
-        num_of_char = len(data)
-        print('Count in text file :', num_of_char)
+        num_of_d = len(data)
+        print('Count in text file :', num_of_d)
 
 
