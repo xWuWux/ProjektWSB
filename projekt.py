@@ -17,7 +17,7 @@ def menu():
     return choice
 
 plik = 'file.txt'
-global letters, words, DottChars
+global letters, words, DottChars, sentences
 
 while True:
     menu()
@@ -87,18 +87,26 @@ while True:
         except Exception:
             print(" Could not open file ", plik)
 
+
     elif choice == 5:
-        plik = open('file.txt')
+
         try:
-            tekst = plik.read()
-        finally:
-            plik.close()
 
+            with open(plik, 'r') as file:
 
-            data = tekst.split(".")
-            num_of_d = len(data)
-            print('Count in text file :', num_of_d)
+                tekst = file.read()
 
+            sentences = 0
+            sentences = tekst.count(".") + tekst.count("!") + tekst.count("?")
+            print('Count sentences of text file:', sentences)
+
+        except FileNotFoundError:
+
+            print(" File not found ", plik)
+
+        except Exception:
+
+            print(" Could not open file ", plik)
     elif choice == 8:
         sys.exit()
 
