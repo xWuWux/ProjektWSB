@@ -87,17 +87,20 @@ while True:
         except Exception:
             print(" Could not open file ", plik)
 
+
     elif choice == 5:
-        plik = open('file.txt')
+
         try:
-            tekst = plik.read()
-        finally:
-            plik.close()
+            with open(plik, 'r') as file:
+                tekst = file.read()
 
-
-            data = tekst.split(".")
-            num_of_d = len(data)
-            print('Count in text file :', num_of_d)
+            sentences = 0
+            sentences = tekst.count(".") + tekst.count("!") + tekst.count("?")
+            print('Count sentences of text file:', sentences)
+        except FileNotFoundError:
+            print(" File not found ", plik)
+        except Exception:
+            print(" Could not open file ", plik)
 
     elif choice == 8:
         sys.exit()
