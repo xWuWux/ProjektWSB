@@ -83,7 +83,7 @@ elif choice == 4:
         print(" ** Brak pliku ", filename, " **")
     except Exception:
         print(" ** Nie mogę otworzyć pliku ", filename)
-
+        
     menu()
 elif choice == 5:
     plik = open('file.txt')
