@@ -17,7 +17,7 @@ def menu():
     return choice
 
 plik = 'file.txt'
-global letters, words, DottChars, sentences
+global letters, words, DottChars
 
 while True:
     menu()
@@ -86,7 +86,6 @@ while True:
             print(" File not found ", plik)
         except Exception:
             print(" Could not open file ", plik)
-
 
     elif choice == 5:
 
