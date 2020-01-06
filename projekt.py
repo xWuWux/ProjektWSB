@@ -1,4 +1,8 @@
 import requests
+import pathlib
+import os
+import string
+import sys
 
 def menu():
     print("1. Pobierz plik z internetu ")
@@ -24,11 +28,14 @@ while True:
 
         print("Please select good value \n")
 
-    if choice==1:
+    if choice == 1:
         url = "http://s3.zylowski.net/public/input/5.txt"
         r = requests.get(url)
-        with open('file.txt', 'w') as file:
-            file.write(r.text.encode('UTF-8'))
+        with open('file.txt', 'w', encoding='utf8') as getFile:
+            getFile.write(r.text)
+        fileStats = pathlib.Path("file.txt")
+        if fileStats.exists():
+            print(" Download file. ")
 
     elif choice == 3:
         plik = open('file.txt')
