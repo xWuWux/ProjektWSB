@@ -16,6 +16,9 @@ def menu():
     choice = int(input("Enter choice: "))
     return choice
 
+plik = 'file.txt'
+global letters, words, DottChars, sentences
+
 while True:
     menu()
     while True:
@@ -37,16 +40,6 @@ while True:
         if fileStats.exists():
             print(" Download file. ")
 
-    elif choice == 3:
-        plik = open('file.txt')
-        try:
-            tekst = plik.read()
-        finally:
-            plik.close()
-
-        data = tekst.split(" ")
-        num_of_words = len(data)
-        print('Count in text file :', num_of_words)
     elif choice == 2:
         def count_letters():
             global letters
@@ -64,6 +57,22 @@ while True:
                 print(" ** Brak pliku ", filename, " **")
             except Exception:
                 print(" ** Nie mogę otworzyć pliku ", filename)
+
+    elif choice == 3:
+        try:
+            with open(plik, 'r') as file:
+                tekst = file.read()
+
+            delWhiteSpace = tekst.strip()
+            words = 0
+            words = len(delWhiteSpace.split())
+            print('Count words of text file:', words)
+
+        except FileNotFoundError:
+            print(" File not found ", plik)
+        except Exception:
+            print(" Could not open file ", plik)
+
     elif choice == 4:
         plik = open('file.txt')
         try:
