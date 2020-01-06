@@ -17,7 +17,7 @@ def menu():
     return choice
 
 plik = 'file.txt'
-global letters, words, DottChars, sentences
+global letters, words, DottChars
 
 while True:
     menu()
@@ -74,43 +74,19 @@ while True:
             print(" Could not open file ", plik)
 
     elif choice == 4:
-        plik = open('file.txt')
         try:
-            tekst = plik.read()
-        finally:
-            plik.close()
+            with open(plik, 'r') as file:
+                tekst = file.read()
 
-        dataD = tekst.split(".")
-        dataC = tekst.split(",")
-        dataS = tekst.split(";")
-        dataCo = tekst.split(":")
-        dataQ = tekst.split("?")
-        dataE = tekst.split("!")
-        dataDa = tekst.split("-")
-
-        num_of_d = len(dataD)
-        num_of_c = len(dataC)
-        num_of_s = len(dataS)
-        num_of_co = len(dataCo)
-        num_of_q = len(dataQ)
-        num_of_e = len(dataE)
-        num_of_Da = len(dataDa)
-
-
-        print('. : ',num_of_d)
-        print(', : ',num_of_c)
-        print('; : ',num_of_s)
-        print(': : ',num_of_co)
-        print('? : ',num_of_q)
-        print('! : ',num_of_e)
-        print('- : ',num_of_Da)
+            DottChars = 0
+            DottChars = tekst.count(".") + tekst.count("!") + tekst.count("?") + tekst.count(",") + tekst.count("'") + tekst.count(";") + tekst.count("-")
+            print("Count special chars of text file: ", str(DottChars))
 
         except FileNotFoundError:
-            print(" ** Brak pliku ", filename, " **")
+            print(" File not found ", plik)
         except Exception:
-            print(" ** Nie mogę otworzyć pliku ", filename)
+            print(" Could not open file ", plik)
 
-        menu()
     elif choice == 5:
         plik = open('file.txt')
         try:
