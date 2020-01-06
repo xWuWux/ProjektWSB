@@ -123,4 +123,6 @@ while True:
             num_of_d = len(data)
             print('Count in text file :', num_of_d)
 
+    elif choice == 8:
+        sys.exit()
 
