@@ -102,7 +102,29 @@ while True:
             print(" File not found ", plik)
         except Exception:
             print(" Could not open file ", plik)
+    elif choice==6:
+        print("!!!")
 
+    elif choice == 7:
+        print(" Save file statystyki.txt ")
+        fileStats = pathlib.Path("statystyki.txt")
+        if fileStats.exists():
+            os.remove(fileStats)
+
+        plik = open('statystyki.txt', 'a')
+        plik.write("Quanity letters: ")
+        plik.write(str(letters))
+        plik.write("\n")
+        plik.write("Quanity words: ")
+        plik.write(str(words))
+        plik.write("\n")
+        plik.write("Quanity special chars: ")
+        plik.write(str(DottChars))
+        plik.write("\n")
+        plik.write("Quanity in a sentences: ")
+        plik.write(str(sentences))
+        plik.write("\n")
+        plik.close()
     elif choice == 8:
         sys.exit()
 
