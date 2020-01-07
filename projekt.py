@@ -17,7 +17,7 @@ def menu():
     return choice
 
 plik = 'file.txt'
-global letters, words, DottChars
+global letters, words, DottChars, sentences
 
 while True:
     menu()
@@ -41,22 +41,23 @@ while True:
             print(" Download file. ")
 
     elif choice == 2:
-        def count_letters():
-            global letters
+        try:
+            with open(plik, 'r') as file:
+                tekst = file.read()
+
             letters = 0
-            try:
-                with open(filename, 'r') as myfile:
-                    data = myfile.read()
 
-                for x in data:
-                    if x.isalpha():
-                        letters += 1
+            for x in tekst:
+                if x.isalpha():
+                    letters += 1
 
-                print(" Ilość liter w pliku ", filename, " to ", str(letters))
-            except FileNotFoundError:
-                print(" ** Brak pliku ", filename, " **")
-            except Exception:
-                print(" ** Nie mogę otworzyć pliku ", filename)
+            print(" Count letters of text file: ", str(letters))
+
+        except FileNotFoundError:
+            print(" File not found ", plik)
+        except Exception:
+            print(" Could not open file ", plik)
+
 
     elif choice == 3:
         try:
