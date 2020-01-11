@@ -1,4 +1,8 @@
 import requests
+import pathlib
+import os
+import string
+import sys
 
 def menu():
     print("1. Pobierz plik z internetu ")
@@ -12,6 +16,9 @@ def menu():
     choice = int(input("Enter choice: "))
     return choice
 
+plik = 'file.txt'
+global letters, words, DottChars, sentences
+
 while True:
     menu()
     while True:
@@ -24,87 +31,100 @@ while True:
 
         print("Please select good value \n")
 
-    if choice==1:
+    if choice == 1:
         url = "http://s3.zylowski.net/public/input/5.txt"
         r = requests.get(url)
-        with open('file.txt', 'w') as file:
-            file.write(r.text.encode('UTF-8'))
+        with open('file.txt', 'w', encoding='utf8') as getFile:
+            getFile.write(r.text)
+        fileStats = pathlib.Path("file.txt")
+        if fileStats.exists():
+            print(" Download file. ")
 
-    elif choice == 3:
-        plik = open('file.txt')
-        try:
-            tekst = plik.read()
-        finally:
-            plik.close()
-
-        data = tekst.split(" ")
-        num_of_words = len(data)
-        print('Count in text file :', num_of_words)
     elif choice == 2:
-        def count_letters():
-            global letters
-            letters = 0
-            try:
-                with open(filename, 'r') as myfile:
-                    data = myfile.read()
-
-                for x in data:
-                    if x.isalpha():
-                        letters += 1
-
-                print(" Ilość liter w pliku ", filename, " to ", str(letters))
-            except FileNotFoundError:
-                print(" ** Brak pliku ", filename, " **")
-            except Exception:
-                print(" ** Nie mogę otworzyć pliku ", filename)
-    elif choice == 4:
-        plik = open('file.txt')
         try:
-            tekst = plik.read()
-        finally:
-            plik.close()
+            with open(plik, 'r') as file:
+                tekst = file.read()
 
-        dataD = tekst.split(".")
-        dataC = tekst.split(",")
-        dataS = tekst.split(";")
-        dataCo = tekst.split(":")
-        dataQ = tekst.split("?")
-        dataE = tekst.split("!")
-        dataDa = tekst.split("-")
+            letters = 0
 
-        num_of_d = len(dataD)
-        num_of_c = len(dataC)
-        num_of_s = len(dataS)
-        num_of_co = len(dataCo)
-        num_of_q = len(dataQ)
-        num_of_e = len(dataE)
-        num_of_Da = len(dataDa)
+            for x in tekst:
+                if x.isalpha():
+                    letters += 1
 
-
-        print('. : ',num_of_d)
-        print(', : ',num_of_c)
-        print('; : ',num_of_s)
-        print(': : ',num_of_co)
-        print('? : ',num_of_q)
-        print('! : ',num_of_e)
-        print('- : ',num_of_Da)
+            print(" Count letters of text file: ", str(letters))
 
         except FileNotFoundError:
-            print(" ** Brak pliku ", filename, " **")
+            print(" File not found ", plik)
         except Exception:
-            print(" ** Nie mogę otworzyć pliku ", filename)
+            print(" Could not open file ", plik)
 
-        menu()
-    elif choice == 5:
-        plik = open('file.txt')
+
+    elif choice == 3:
         try:
-            tekst = plik.read()
-        finally:
-            plik.close()
+            with open(plik, 'r') as file:
+                tekst = file.read()
+
+            delWhiteSpace = tekst.strip()
+            words = 0
+            words = len(delWhiteSpace.split())
+            print('Count words of text file:', words)
+
+        except FileNotFoundError:
+            print(" File not found ", plik)
+        except Exception:
+            print(" Could not open file ", plik)
+
+    elif choice == 4:
+        try:
+            with open(plik, 'r') as file:
+                tekst = file.read()
+
+            DottChars = 0
+            DottChars = tekst.count(".") + tekst.count("!") + tekst.count("?") + tekst.count(",") + tekst.count("'") + tekst.count(";") + tekst.count("-")
+            print("Count special chars of text file: ", str(DottChars))
+
+        except FileNotFoundError:
+            print(" File not found ", plik)
+        except Exception:
+            print(" Could not open file ", plik)
 
 
-            data = tekst.split(".")
-            num_of_d = len(data)
-            print('Count in text file :', num_of_d)
+    elif choice == 5:
 
+        try:
+            with open(plik, 'r') as file:
+                tekst = file.read()
+
+            sentences = 0
+            sentences = tekst.count(".") + tekst.count("!") + tekst.count("?")
+            print('Count sentences of text file:', sentences)
+        except FileNotFoundError:
+            print(" File not found ", plik)
+        except Exception:
+            print(" Could not open file ", plik)
+    elif choice==6:
+        print("!!!")
+
+    elif choice == 7:
+        print(" Save file statystyki.txt ")
+        fileStats = pathlib.Path("statystyki.txt")
+        if fileStats.exists():
+            os.remove(fileStats)
+
+        plik = open('statystyki.txt', 'a')
+        plik.write("Quanity letters: ")
+        plik.write(str(letters))
+        plik.write("\n")
+        plik.write("Quanity words: ")
+        plik.write(str(words))
+        plik.write("\n")
+        plik.write("Quanity special chars: ")
+        plik.write(str(DottChars))
+        plik.write("\n")
+        plik.write("Quanity in a sentences: ")
+        plik.write(str(sentences))
+        plik.write("\n")
+        plik.close()
+    elif choice == 8:
+        sys.exit()
 
