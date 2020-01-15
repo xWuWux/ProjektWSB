@@ -103,7 +103,16 @@ while True:
         except Exception:
             print(" Could not open file ", plik)
     elif choice==6:
-        print("!!!")
+        try:
+            with open(plik, 'r') as file:
+                tekst = file.read().replace('\n', '')
+                res = Counter(tekst)
+                print("Count of all characters in text is :\n " + str(res))
+
+        except FileNotFoundError:
+            print(" File not found ", plik)
+        except Exception:
+            print(" Could not open file ", plik)
 
     elif choice == 7:
         print(" Save file statystyki.txt ")
